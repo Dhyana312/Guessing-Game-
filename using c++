@@ -1,0 +1,45 @@
+#include <iostream>
+#include <random>  
+using namespace std;
+
+int main() {
+    string play = "yes";
+
+    random_device rd;
+    mt19937 gen(rd());  
+    uniform_int_distribution<> dis(0, 99);  
+
+    while (play == "yes") { 
+        int randNum = dis(gen);  
+        int guess = -1;
+        int tries = 0;
+
+        while (guess != randNum) {
+            cout << "Guess a number between 0 and 100: ";
+            cin >> guess;
+            tries++;
+
+            if (guess == randNum) {
+                cout << "Awesome, you guessed the right number!" << endl;
+                cout << "Number of tries: " << tries << endl;
+
+            
+                cout << "Do you want to play again? (yes or no): ";
+                cin >> play;
+
+                
+                while (play != "yes" && play != "no") {
+                    cout << "Invalid input. Please enter 'yes' or 'no': ";
+                    cin >> play;
+                }
+            } else if (guess < randNum) {
+                cout << "Your guess is too low, try again." << endl;
+            } else {
+                cout << "Your guess is too high, try again." << endl;
+            }
+        }
+    }
+
+    cout << "Thanks for playing!" << endl;
+    return 0;
+}  
